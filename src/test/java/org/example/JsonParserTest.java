@@ -17,6 +17,8 @@ public class JsonParserTest {
 
     private static String UNSUCCESSFUL_TEST_PATH;
 
+    public static Integer AMOUNT_OF_THREADS;
+
     private static JsonParser jsonParser;
 
     @BeforeAll
@@ -24,13 +26,14 @@ public class JsonParserTest {
         jsonParser = new JsonParser();
         SUCCESSFUL_TEST_PATH = "src/main/resources/data/positive_test.json";
         UNSUCCESSFUL_TEST_PATH = "src/main/resources/data/empty.json";
+        AMOUNT_OF_THREADS = 1;
     }
 
     @Test
-    public void testParseNameField() {
+    public void testParseNameField() throws InterruptedException {
         File[] testFiles = {new File(SUCCESSFUL_TEST_PATH)};
 
-        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles);
+        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles, AMOUNT_OF_THREADS);
 
         assertNotNull(teachers);
         assertFalse(teachers.isEmpty());
@@ -40,10 +43,10 @@ public class JsonParserTest {
     }
 
     @Test
-    public void testParseSurnameField() {
+    public void testParseSurnameField() throws InterruptedException {
         File[] testFiles = {new File(SUCCESSFUL_TEST_PATH)};
 
-        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles);
+        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles, AMOUNT_OF_THREADS);
 
         assertNotNull(teachers);
         assertFalse(teachers.isEmpty());
@@ -53,10 +56,10 @@ public class JsonParserTest {
     }
 
     @Test
-    public void testParseSubjectField() {
+    public void testParseSubjectField() throws InterruptedException {
         File[] testFiles = {new File(SUCCESSFUL_TEST_PATH)};
 
-        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles);
+        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles, AMOUNT_OF_THREADS);
 
         assertNotNull(teachers);
         assertFalse(teachers.isEmpty());
@@ -68,10 +71,10 @@ public class JsonParserTest {
     }
 
     @Test
-    public void testParseCitiesField() {
+    public void testParseCitiesField() throws InterruptedException {
         File[] testFiles = {new File(SUCCESSFUL_TEST_PATH)};
 
-        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles);
+        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles, AMOUNT_OF_THREADS);
 
         assertNotNull(teachers);
         assertFalse(teachers.isEmpty());
@@ -81,10 +84,10 @@ public class JsonParserTest {
     }
 
     @Test
-    public void testParseJsonFiles_Negative() {
+    public void testParseJsonFiles_Negative() throws InterruptedException {
         File[] testFiles = {new File(UNSUCCESSFUL_TEST_PATH)};
 
-        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles);
+        List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles, AMOUNT_OF_THREADS);
 
         assertNotNull(teachers);
         assertTrue(teachers.isEmpty());
