@@ -93,12 +93,16 @@ The project experimented with different numbers of threads for parsing JSON file
 
 **Example with 1 thread for 1800 files**
 ![img.png](src/main/resources/data/img.png)
+
 **Example with 2 threads for 1800 files**
 ![img_1.png](src/main/resources/data/img_1.png)
+
 **Example with 4 threads for 1800 files**
 ![img_2.png](src/main/resources/data/img_2.png)
+
 **Example with 8 threads for 1800 files**
 ![img_3.png](src/main/resources/data/img_3.png)
+
 For optimal performance, it's recommended to adjust the number of threads based on the available hardware resources and the size of the input data.
 
 
