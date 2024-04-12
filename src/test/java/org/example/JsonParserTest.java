@@ -3,6 +3,7 @@ package org.example;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.example.entity.Teacher;
+import org.example.parser.JsonParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -13,7 +14,7 @@ public class JsonParserTest {
     @Test
     public void testParseJsonFiles_Positive() {
         JsonParser jsonParser = new JsonParser();
-        File[] testFiles = {new File("positive_test.json")};
+        File[] testFiles = {new File("src/main/resources/data/positive_test.json")};
 
         List<Teacher> teachers = jsonParser.parseJsonFiles(testFiles);
 

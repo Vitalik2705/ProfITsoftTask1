@@ -2,6 +2,7 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.example.calculator.StatisticsCalculator;
 import org.example.entity.Subject;
 import org.example.entity.Teacher;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,8 @@
 package org.example;
 
+import org.example.calculator.StatisticsCalculator;
 import org.example.entity.Teacher;
+import org.example.parser.JsonParser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -52,7 +54,9 @@ public class Main {
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .forEachOrdered(entry -> sortedStatistics.put(entry.getKey(), entry.getValue()));
 
-        try (FileWriter fileWriter = new FileWriter("statistics_by_" + fieldName.toLowerCase() + ".xml")) {
+        String filePath = "src/main/resources/data/statistics_by_" + fieldName.toLowerCase() + ".xml";
+
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
             fileWriter.write("<statistics>\n");
             for (Map.Entry<String, Integer> entry : sortedStatistics.entrySet()) {
                 fileWriter.write("  <item>\n");

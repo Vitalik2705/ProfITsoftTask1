@@ -1,4 +1,4 @@
-package org.example;
+package org.example.calculator;
 
 import org.example.entity.Teacher;
 

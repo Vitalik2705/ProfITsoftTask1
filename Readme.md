@@ -86,13 +86,13 @@ An example of the generated XML statistics report:
 The project experimented with different numbers of threads for parsing JSON files concurrently. The performance results varied based on the hardware and the number of available processor cores. Generally, an increase in the number of threads up to the number of available processor cores improved processing speed.
 
 **Example with 10 separate threads for 10 files**
-![img.png](img.png)![img_1.png](img_1.png)
+![img.png](src/main/resources/data/img.png)![img_1.png](src/main/resources/data/img_1.png)
 
 **Example with 4 separate threads for 4 files**
-![img_2.png](img_2.png)![img_3.png](img_3.png)
+![img_2.png](src/main/resources/data/img_2.png)![img_3.png](src/main/resources/data/img_3.png)
 
 **Example with 2 separate threads for 2 files**
-![img_4.png](img_4.png)![img_5.png](img_5.png)
+![img_4.png](src/main/resources/data/img_4.png)![img_5.png](src/main/resources/data/img_5.png)
 We can see that time is very similar thanks to the threads which gives opportunity to work concurrently
 
 For optimal performance, it's recommended to adjust the number of threads based on the available hardware resources and the size of the input data.
