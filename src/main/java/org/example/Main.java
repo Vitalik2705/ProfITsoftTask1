@@ -10,14 +10,12 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 public class Main {
     public static final String FOLDER_PATH = "E:\\JavaProjects\\ProfITsoftTask1\\Jsons";
     public static final String RESULT_FILE_FOLDER = "src/main/resources/data/statistics_by_";
-    public static final Integer AMOUNT_OF_THREADS = 1;
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) {
         String fieldName = "Cities";
 
         long startTimeParsing = System.currentTimeMillis();
@@ -36,9 +34,9 @@ public class Main {
         printDuration("Час створення XML файлу", startTimeXmlGeneration, endTimeXmlGeneration);
     }
 
-    private static List<Teacher> parseJsonFiles() throws ExecutionException, InterruptedException {
+    private static List<Teacher> parseJsonFiles() {
         JsonParser jsonParser = new JsonParser();
-        return jsonParser.parseJsonFiles(getJsonFiles(), AMOUNT_OF_THREADS);
+        return jsonParser.parseJsonFiles(getJsonFiles());
     }
 
     private static File[] getJsonFiles() {

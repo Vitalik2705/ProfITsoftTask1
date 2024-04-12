@@ -1,0 +1,15 @@
+[
+    {
+        "Name": "Emily",
+        "Surname": "Brown",
+        "Subject": "Chemistry",
+        "Cities": "Lviv, Kyiv"
+    },
+    {
+        "Name": "David",
+        "Surname": "Wilson",
+        "Subject": "History",
+        "Cities": "Kyiv"
+    }
+]
+
