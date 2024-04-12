@@ -12,49 +12,54 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String FOLDER_PATH = "E:\\JavaProjects\\ProfITsoftTask1\\Jsons";
+    public static final String RESULT_FILE_FOLDER = "src/main/resources/data/statistics_by_";
+
     public static void main(String[] args) {
-        String folderPath = "E:\\JavaProjects\\ProfITsoftTask1\\Jsons";
         String fieldName = "Cities";
 
         long startTimeParsing = System.currentTimeMillis();
-        JsonParser jsonParser = new JsonParser();
-        List<Teacher> teachers = jsonParser.parseJsonFiles(getJsonFiles(folderPath));
+        List<Teacher> teachers = parseJsonFiles();
         long endTimeParsing = System.currentTimeMillis();
-        long durationParsing = endTimeParsing - startTimeParsing;
-        System.out.println("Час парсингу JSON файлів в " + getJsonFiles(folderPath).length + " потоках: " + durationParsing + " мс");
+        printDuration("Час парсингу JSON файлів", startTimeParsing, endTimeParsing);
 
         long startTimeCalculation = System.currentTimeMillis();
-        StatisticsCalculator statisticsCalculator = new StatisticsCalculator();
-        Map<String, Integer> statistics = statisticsCalculator.calculateStatistics(teachers, fieldName);
+        Map<String, Integer> statistics = calculateStatistics(teachers, fieldName);
         long endTimeCalculation = System.currentTimeMillis();
-        long durationCalculation = endTimeCalculation - startTimeCalculation;
-        System.out.println("Час обчислення статистики: " + durationCalculation + " мс");
+        printDuration("Час обчислення статистики", startTimeCalculation, endTimeCalculation);
 
         long startTimeXmlGeneration = System.currentTimeMillis();
         generateXmlStatistics(statistics, fieldName);
         long endTimeXmlGeneration = System.currentTimeMillis();
-        long durationXmlGeneration = endTimeXmlGeneration - startTimeXmlGeneration;
-        System.out.println("Час створення XML файлу: " + durationXmlGeneration + " мс");
+        printDuration("Час створення XML файлу", startTimeXmlGeneration, endTimeXmlGeneration);
     }
 
-    private static File[] getJsonFiles(String folderPath) {
-        File folder = new File(folderPath);
-        if (folder.exists() && folder.isDirectory()) {
-            return folder.listFiles((dir, name) -> name.endsWith(".json"));
-        } else {
+    private static List<Teacher> parseJsonFiles() {
+        JsonParser jsonParser = new JsonParser();
+        return jsonParser.parseJsonFiles(getJsonFiles());
+    }
+
+    private static File[] getJsonFiles() {
+        File folder = new File(FOLDER_PATH);
+        if (!folder.exists() || !folder.isDirectory()) {
             System.out.println("The specified folder does not exist or is not a directory.");
             return new File[0];
         }
+        return folder.listFiles((dir, name) -> name.endsWith(".json"));
     }
 
-    public static void generateXmlStatistics(Map<String, Integer> statistics, String fieldName) {
-        LinkedHashMap<String, Integer> sortedStatistics = new LinkedHashMap<>();
+    private static Map<String, Integer> calculateStatistics(List<Teacher> teachers, String fieldName) {
+        StatisticsCalculator statisticsCalculator = new StatisticsCalculator();
+        return statisticsCalculator.calculateStatistics(teachers, fieldName);
+    }
 
+    private static void generateXmlStatistics(Map<String, Integer> statistics, String fieldName) {
+        LinkedHashMap<String, Integer> sortedStatistics = new LinkedHashMap<>();
         statistics.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .forEachOrdered(entry -> sortedStatistics.put(entry.getKey(), entry.getValue()));
 
-        String filePath = "src/main/resources/data/statistics_by_" + fieldName.toLowerCase() + ".xml";
+        String filePath = RESULT_FILE_FOLDER + fieldName.toLowerCase() + ".xml";
 
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             fileWriter.write("<statistics>\n");
@@ -68,5 +73,10 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void printDuration(String message, long startTime, long endTime) {
+        long duration = endTime - startTime;
+        System.out.println(message + ": " + duration + " ms");
     }
 }
