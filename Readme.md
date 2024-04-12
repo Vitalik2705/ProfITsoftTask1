@@ -12,6 +12,12 @@ Represents a teacher entity with attributes such as name, surname, subject, and 
 **Subject:**
 Represents a subject entity with a name attribute.
 
+**JsonParser Class:**
+This class is responsible for parsing JSON files containing information about teachers. It utilizes Gson library for parsing JSON data. It reads the JSON files asynchronously using a thread pool to improve performance.
+
+**StatisticsCalculator Class:**
+This class calculates statistics based on the information extracted from the parsed JSON data. It takes a list of teachers and a field name as input, and then calculates the frequency of values associated with the specified field among the teachers. The result is returned as a map where the keys represent the unique values of the specified field, and the values represent the frequency of occurrence of each value.
+
 ### **Input Files:**
 
 An example of an input JSON file containing information about teachers:
